@@ -1,0 +1,15 @@
+artifact_uri: /home/evharthman/ml_practice/mlruns/114665234389632925/13afa2f12fac44c4966acc0d5ef05050/artifacts
+end_time: 1743533192741
+entry_point_name: ''
+experiment_id: '114665234389632925'
+lifecycle_stage: active
+run_id: 13afa2f12fac44c4966acc0d5ef05050
+run_name: Catboost_experiment
+run_uuid: 13afa2f12fac44c4966acc0d5ef05050
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1743533189521
+status: 4
+tags: []
+user_id: evharthman

@@ -3,3 +3,8 @@ scikit-learn
 seaborn
 xgboost
 optuna
+catboost
+numpy==1.23.5
+lightgbm
+mlflow
+google-cloud-storage
