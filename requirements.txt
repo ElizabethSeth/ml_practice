@@ -8,3 +8,7 @@ numpy==1.23.5
 lightgbm
 mlflow
 google-cloud-storage
+geopandas
+shapely
+clickhouse_connect
+load_dotenv
