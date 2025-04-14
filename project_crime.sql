@@ -203,3 +203,13 @@ SELECT
     intersects,
     'Chicago' AS city
 FROM chicago_intersects;
+
+
+CREATE TABLE IF NOT EXISTS  crime_data.nyc_districts  (
+    OBJECTID UInt32,
+    BoroCD UInt32,
+    geom String  -- geometry stored as WKT
+) ENGINE = MergeTree
+ORDER BY OBJECTID
+
+select * from crime_data.nyc_districts
