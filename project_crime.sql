@@ -132,10 +132,51 @@ ORDER BY ARREST_DATE
 LIMIT 100;
 
 
-CREATE TABLE  crime_data.crimes
-ENGINE = MergeTree
-ORDER BY (crime_id)
-AS
+CREATE TABLE IF NOT EXISTS  crime_data.nyc_districts  (
+    OBJECTID UInt32,
+    BoroCD UInt32,
+    geom String  -- geometry stored as WKT
+) ENGINE = MergeTree
+ORDER BY OBJECTID
+
+select * from crime_data.nyc_districts
+
+CREATE TABLE IF NOT EXISTS crime_data.crimes (
+    crime_id UInt64,
+    ARREST_DATE Nullable(String),
+    PD_CD Nullable(UInt16),
+    PD_DESC Nullable(String),
+    KY_CD Nullable(UInt16),
+    LAW_CODE Nullable(String),
+    LAW_CAT_CD Nullable(String),
+    ARREST_BORO Nullable(String),
+    ARREST_PRECINCT Nullable(UInt16),
+    JURISDICTION_CODE Nullable(UInt16),
+    AGE_GROUP Nullable(String),
+    PERP_SEX Nullable(String),
+    PERP_RACE Nullable(String),
+    x_coord Nullable(Float64),
+    y_coord Nullable(Float64),
+    Latitude Nullable(Float64),
+    Longitude Nullable(Float64),
+    description Nullable(String),
+    primary_type Nullable(String),
+    case_number Nullable(String),
+    arrest Nullable(UInt8),
+    domestic Nullable(UInt8),
+    beat Nullable(UInt16),
+    ward Nullable(UInt16),
+    fbi_code Nullable(String),
+    year Nullable(UInt16),
+    district Nullable(UInt16),
+    intersects Nullable(UInt8),
+    city String
+) ENGINE = MergeTree
+ORDER BY (crime_id);
+
+SHOW TABLES FROM crime_data;
+
+INSERT INTO crime_data.crimes
 SELECT
     ARREST_KEY AS crime_id,
     ARREST_DATE,
@@ -161,55 +202,9 @@ SELECT
     NULL AS domestic,
     NULL AS beat,
     NULL AS ward,
-    NULL AS community_area,
     NULL AS fbi_code,
     NULL AS year,
     district,
     intersects,
     'NYC' AS city
-FROM crime_nyc
-
-UNION ALL
-
-SELECT
-    ID AS crime_id,
-    NULL AS ARREST_DATE,
-    NULL AS PD_CD,
-    NULL AS PD_DESC,
-    NULL AS KY_CD,
-    NULL AS LAW_CODE,
-    NULL AS LAW_CAT_CD,
-    NULL AS ARREST_BORO,
-    NULL AS ARREST_PRECINCT,
-    NULL AS JURISDICTION_CODE,
-    NULL AS AGE_GROUP,
-    NULL AS PERP_SEX,
-    NULL AS PERP_RACE,
-    "X Coordinate" AS x_coord,
-    "Y Coordinate" AS y_coord,
-    Latitude,
-    Longitude,
-    Description AS description,
-    "Primary Type" AS primary_type,
-    "Case Number" AS case_number,
-    Arrest,
-    Domestic,
-    Beat,
-    Ward,
-    "Community Area" AS community_area,
-    "FBI Code" AS fbi_code,
-    Year,
-    DIST_NUM AS district,
-    intersects,
-    'Chicago' AS city
-FROM chicago_intersects;
-
-
-CREATE TABLE IF NOT EXISTS  crime_data.nyc_districts  (
-    OBJECTID UInt32,
-    BoroCD UInt32,
-    geom String  -- geometry stored as WKT
-) ENGINE = MergeTree
-ORDER BY OBJECTID
-
-select * from crime_data.nyc_districts
+FROM crime_data.nyc_crime;
