@@ -208,3 +208,10 @@ SELECT
     intersects,
     'NYC' AS city
 FROM crime_data.nyc_crime;
+
+
+
+
+
+select * from crime_data.crime_merge
+LIMIT 100;
