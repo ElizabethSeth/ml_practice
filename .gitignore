@@ -1,8 +1,2 @@
 .env
 data
-lib64
-lib
-bin
-pyvenv.cfg
-share
-data/data_corr.csv
