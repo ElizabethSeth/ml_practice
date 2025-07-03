@@ -12,3 +12,4 @@ geopandas==1.1.0
 shapely==2.1.1
 clickhouse_connect
 load_dotenv
+optuna-integration[catboost]
